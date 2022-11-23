@@ -14,6 +14,7 @@ const Home = () => {
       setNewTask("")
     }
   }
+  // Agregar al botón azul la funcionalidad de al hacer click poner color por ser importante
 
   function removeTask(index){
     tasks.splice(index, 1)
@@ -36,7 +37,10 @@ const Home = () => {
         {tasks.map((task, index) => (
           <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
             {task}
+            <div className="right-buttons ">
+            <button className="badge bg-primary rounded-pill" onClick={()=>removeTask(index)}>O</button>
             <button className="badge bg-danger rounded-pill" onClick={()=>removeTask(index)}>X</button>
+            </div>
           </li>
         ))}
         <li className="list-group-item d-flex text-center justify-content-center align-items-center">
