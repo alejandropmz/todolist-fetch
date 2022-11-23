@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 
 const Home = () => {
-  const [tasks, setTasks] = useState([
-    "tarea1",
-    "tarea2"
-  ]);
+  const [tasks, setTasks] = useState([]);
 
   const [newTasks, setNewTask] = useState("")
 
@@ -18,16 +15,23 @@ const Home = () => {
 
   function removeTask(index){
     tasks.splice(index, 1)
-    console.log(tasks)
     setNewTask([...newTasks])
   }
 
+  function importantTask(index){
+    tasks[index] = className="important"
+  }
+
   return (
-    <div className="container w-50 d-flex justify-content-center">
+    <div className="container w-50 d-flex justify-content-center ">
       <ul className="list-group">
+        <li className="font-list list-group-item d-flex justify-content-center align-items-center">
+          <div>My tasks list</div>
+        </li>
         <li className="list-group-item d-flex justify-content-between align-items-center">
           <input
             type="text"
+            placeholder="write tasks here"
             className="form-control" onKeyDown={e=>addTasks(e)}
             onChange={e=>setNewTask(e.target.value)}
             value={newTasks}
@@ -35,11 +39,11 @@ const Home = () => {
           ></input>
         </li>
         {tasks.map((task, index) => (
-          <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+          <li key={index} className="list-change list-group-item d-flex justify-content-between align-items-center">
             {task}
             <div className="right-buttons ">
-            <button className="badge bg-primary rounded-pill" onClick={()=>removeTask(index)}>O</button>
-            <button className="badge bg-danger rounded-pill" onClick={()=>removeTask(index)}>X</button>
+            <button className="badge bg-danger rounded-pill red-button" onClick={()=>removeTask(index)}>X</button>
+            <button className="badge bg-primary rounded-pill" onClick={()=>importantTask(index)}>O</button>
             </div>
           </li>
         ))}

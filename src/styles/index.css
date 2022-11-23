@@ -1,14 +1,26 @@
+.container {
+    margin-top: 20px;
+}
+
 .list-group {
     margin: auto;
 }
-/* 
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
 
-*/
+.font-list {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.list-change .red-button {
+    display: none;
+}
+
+.list-change:hover .red-button {
+    display: initial;
+}
+
+.important {
+    background-color: aqua;
+}
+
+
