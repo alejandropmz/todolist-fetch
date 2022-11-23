@@ -19,7 +19,6 @@ const Home = () => {
   }
 
   function importantTask(index){
-    tasks[index] = className="important"
   }
 
   return (
@@ -40,15 +39,15 @@ const Home = () => {
         </li>
         {tasks.map((task, index) => (
           <li key={index} className="list-change list-group-item d-flex justify-content-between align-items-center">
-            {task}
+            <small>{task}</small>
             <div className="right-buttons ">
-            <button className="badge bg-danger rounded-pill red-button" onClick={()=>removeTask(index)}>X</button>
             <button className="badge bg-primary rounded-pill" onClick={()=>importantTask(index)}>O</button>
+            <button className="badge bg-danger rounded-pill red-button {}}" onClick={()=>removeTask(index)}>X</button>
             </div>
           </li>
         ))}
         <li className="list-group-item d-flex text-center justify-content-center align-items-center">
-          <small>{tasks.length} items</small>
+          <small className="font.size" >{tasks.length} items</small>
         </li>
       </ul>
     </div>
