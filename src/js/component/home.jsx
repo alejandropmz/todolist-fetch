@@ -18,6 +18,7 @@ const Home = () => {
     setNewTask([...newTasks])
   }
 
+  // Crear una funcion la cual pueda añadir una clase que genere un background azul para marcar una tarea como importante
   function importantTask(index){
   }
 
