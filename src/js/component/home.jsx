@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
@@ -7,7 +7,7 @@ const Home = () => {
 
   function addTasks(e){
     if(e.code=="Enter" && newTasks!=""){
-      setTasks([...tasks, newTasks])
+      setTasks([...tasks, {label: newTasks, done:false}])
       setNewTask("")
     }
   }
@@ -17,6 +17,35 @@ const Home = () => {
     tasks.splice(index, 1)
     setNewTask([...newTasks])
   }
+
+  useEffect(async()=>{
+    
+  })
+
+
+  //indica que es una funcion asincrona con async
+  useEffect(async()=>{
+    var respuesta = await fetch("https://assets.breatheco.de/apis/fake/todos/user/alejandro2")
+    //verificar si la lista existe o no
+    if (respuesta.status == 404){
+      //si no se consigue toca crear la lista
+      respuesta = await fetch("https://assets.breatheco.de/apis/fake/todos/user/alejandro2",{
+        method:"POST",
+        body:JASON.stringify([]),
+        headers:{
+          "Content-type":"application/json"
+        }
+      })
+      respuesta = await fetch("https://assets.breatheco.de/apis/fake/todos/user/alejandro2")
+    }else if(!respuesta.ok){
+      // Hubo un error
+      console.error("Error al cargar una lista" + respuesta.statusText)
+    }
+    // Cargar la data del body
+    var data = await respuesta.json()
+    //actualiza el estado con la data
+    setTasks(data)
+  },[])
 
   // Crear una funcion la cual pueda añadir una clase que genere un background azul para marcar una tarea como importante
   function importantTask(index){
@@ -40,7 +69,7 @@ const Home = () => {
         </li>
         {tasks.map((task, index) => (
           <li key={index} className="list-change list-group-item d-flex justify-content-between align-items-center">
-            <small>{task}</small>
+            <small>{task.label}</small>
             <div className="right-buttons ">
             <button className="badge bg-primary rounded-pill" onClick={()=>importantTask(index)}>O</button>
             <button className="badge bg-danger rounded-pill red-button {}}" onClick={()=>removeTask(index)}>X</button>
